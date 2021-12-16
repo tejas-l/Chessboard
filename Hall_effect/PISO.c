@@ -19,7 +19,7 @@ char space = '\n';
 
 uint8_t shiftIn(int mydataPin, int myclockPin) 
 {
-	uint8_t myDataIn = 0; 
+	uint8_t myDataIn = 0x00; 
 	uint8_t temp = 0; 
 	
 	for (int i=0 ; i<8 ; i++)
@@ -30,7 +30,7 @@ uint8_t shiftIn(int mydataPin, int myclockPin)
 // 			 sprintf(abc,"%d\t",temp);
 // 			 UART_putstring(abc);
 			 
-			 if (!temp)
+			 if (temp)
 			 {
 				 myDataIn = myDataIn | (1<<i); 
 				
