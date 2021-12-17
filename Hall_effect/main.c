@@ -13,6 +13,7 @@
 #include <string.h>
 #include "PISO.h"
 #include "UART.h"
+#include "Board.h"
 #define BAUD_RATE 9600
 #define BAUD_PRESCALER (((F_CPU / (BAUD_RATE * 16UL))) - 1)
 
@@ -119,7 +120,7 @@ void squareprev()
 	{
 		for (j=0;j<8;j++)
 		{
-			if((rows[i] & (0x1<<j) ) != 0 ) // pick up peice - 0-->1 transition
+			if((rows[i] & (0x1<<j) ) != 0 ) // pick up piece - 0-->1 transition
 			{
 				int check = boardstate [i][j];
 				
@@ -162,18 +163,21 @@ void  squarenext()
 					
 					
 							if (check == 0)
-								{
+							{
 					
-	// 						sprintf(board," %d,%d \n\r ",i,j);
-	// 						UART_putstring(board);
-					
-							boardstate[i][j] = temp ;
-							print = 1; 
+								boardstate[i][j] = temp ;
+								print = 1; 
 								pick = 0; 
+								
+								pieceprint(temp);
+								printsquare(i,j); 
+								rowsupdate();
+								boardupdate();
+						
+						
 								temp = 0;
-						rowsupdate();
-						boardupdate();
-								}
+						
+							}
  						
 					
 					}
@@ -265,12 +269,12 @@ int main(void)
 			_delay_ms(500);
 		}
 	
-// 		if (print)
-// 			{
+		if (print)
+			{
 				printboard();
 				_delay_ms(500);
 				print= 0;
-			//}
+			}
 
 	}
 }

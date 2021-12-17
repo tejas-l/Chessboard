@@ -1,4 +1,4 @@
-main.d main.o: .././main.c \
+Board.d Board.o: .././Board.c \
  d:\avr\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\avr\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  d:\avr\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -17,7 +17,7 @@ main.d main.o: .././main.c \
  d:\avr\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  d:\avr\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  d:\avr\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
- .././PISO.h .././UART.h .././Board.h
+ .././PISO.h .././UART.h
 
 d:\avr\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -58,5 +58,3 @@ d:\avr\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
 .././PISO.h:
 
 .././UART.h:
-
-.././Board.h:
