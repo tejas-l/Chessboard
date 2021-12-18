@@ -26,7 +26,7 @@ uint8_t shiftIn(int mydataPin, int myclockPin)
 		{
 			 PORTD &= ~(1U<<myclockPin);
 			_delay_us(4);
-			 temp = (PINB & (1<<mydataPin));
+			 temp = (PIND & (1<<mydataPin));
 // 			 sprintf(abc,"%d\t",temp);
 // 			 UART_putstring(abc);
 			 
@@ -50,9 +50,9 @@ void latch( int mylatchPin, int myclockPin)
 	
 	PORTD &= ~(1U<< myclockPin);
 	_delay_us(20);
-	PORTB &= ~(1U<<mylatchPin);  // Read Parallel
+	PORTD &= ~(1U<<mylatchPin);  // Read Parallel
 	_delay_us(20);
-	PORTB |= (1U<<mylatchPin); // Serial Out
+	PORTD |= (1U<<mylatchPin); // Serial Out
 	_delay_us(20);
 	
 

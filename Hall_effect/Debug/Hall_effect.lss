@@ -672,18 +672,18 @@ void printsquare(int i, int j)
 	}
 	
 }
- 3f2:	84 b1       	in	r24, 0x04	; 4
- 3f4:	81 60       	ori	r24, 0x01	; 1
- 3f6:	84 b9       	out	0x04, r24	; 4
+ 3f2:	8a b1       	in	r24, 0x0a	; 10
+ 3f4:	80 62       	ori	r24, 0x20	; 32
+ 3f6:	8a b9       	out	0x0a, r24	; 10
  3f8:	8a b1       	in	r24, 0x0a	; 10
  3fa:	80 68       	ori	r24, 0x80	; 128
  3fc:	8a b9       	out	0x0a, r24	; 10
- 3fe:	84 b1       	in	r24, 0x04	; 4
- 400:	84 60       	ori	r24, 0x04	; 4
- 402:	84 b9       	out	0x04, r24	; 4
- 404:	84 b1       	in	r24, 0x04	; 4
- 406:	8d 7f       	andi	r24, 0xFD	; 253
- 408:	84 b9       	out	0x04, r24	; 4
+ 3fe:	8a b1       	in	r24, 0x0a	; 10
+ 400:	88 60       	ori	r24, 0x08	; 8
+ 402:	8a b9       	out	0x0a, r24	; 10
+ 404:	8a b1       	in	r24, 0x0a	; 10
+ 406:	8f 7e       	andi	r24, 0xEF	; 239
+ 408:	8a b9       	out	0x0a, r24	; 10
  40a:	08 95       	ret
 
 0000040c <rowsupdate>:
@@ -1054,14 +1054,14 @@ int main(void)
 	latch(latchPin,clockPin);
  6f4:	67 e0       	ldi	r22, 0x07	; 7
  6f6:	70 e0       	ldi	r23, 0x00	; 0
- 6f8:	80 e0       	ldi	r24, 0x00	; 0
+ 6f8:	85 e0       	ldi	r24, 0x05	; 5
  6fa:	90 e0       	ldi	r25, 0x00	; 0
  6fc:	0e 94 20 04 	call	0x840	; 0x840 <latch>
 	
 	rows[3] = shiftIn(dataPin,clockPin);
  700:	67 e0       	ldi	r22, 0x07	; 7
  702:	70 e0       	ldi	r23, 0x00	; 0
- 704:	81 e0       	ldi	r24, 0x01	; 1
+ 704:	84 e0       	ldi	r24, 0x04	; 4
  706:	90 e0       	ldi	r25, 0x00	; 0
  708:	0e 94 eb 03 	call	0x7d6	; 0x7d6 <shiftIn>
  70c:	c2 eb       	ldi	r28, 0xB2	; 178
@@ -1070,21 +1070,21 @@ int main(void)
 	rows[2] = shiftIn(dataPin,clockPin);
  712:	67 e0       	ldi	r22, 0x07	; 7
  714:	70 e0       	ldi	r23, 0x00	; 0
- 716:	81 e0       	ldi	r24, 0x01	; 1
+ 716:	84 e0       	ldi	r24, 0x04	; 4
  718:	90 e0       	ldi	r25, 0x00	; 0
  71a:	0e 94 eb 03 	call	0x7d6	; 0x7d6 <shiftIn>
  71e:	8a 83       	std	Y+2, r24	; 0x02
 	rows[1] = shiftIn(dataPin,clockPin);
  720:	67 e0       	ldi	r22, 0x07	; 7
  722:	70 e0       	ldi	r23, 0x00	; 0
- 724:	81 e0       	ldi	r24, 0x01	; 1
+ 724:	84 e0       	ldi	r24, 0x04	; 4
  726:	90 e0       	ldi	r25, 0x00	; 0
  728:	0e 94 eb 03 	call	0x7d6	; 0x7d6 <shiftIn>
  72c:	89 83       	std	Y+1, r24	; 0x01
 	rows[0] = shiftIn(dataPin,clockPin);
  72e:	67 e0       	ldi	r22, 0x07	; 7
  730:	70 e0       	ldi	r23, 0x00	; 0
- 732:	81 e0       	ldi	r24, 0x01	; 1
+ 732:	84 e0       	ldi	r24, 0x04	; 4
  734:	90 e0       	ldi	r25, 0x00	; 0
  736:	0e 94 eb 03 	call	0x7d6	; 0x7d6 <shiftIn>
  73a:	88 83       	st	Y, r24
@@ -1233,8 +1233,8 @@ uint8_t shiftIn(int mydataPin, int myclockPin)
  800:	f1 f7       	brne	.-4      	; 0x7fe <shiftIn+0x28>
  802:	00 00       	nop
 			_delay_us(4);
-			 temp = (PINB & (1<<mydataPin));
- 804:	93 b1       	in	r25, 0x03	; 3
+			 temp = (PIND & (1<<mydataPin));
+ 804:	99 b1       	in	r25, 0x09	; 9
  806:	0a 2e       	mov	r0, r26
  808:	02 c0       	rjmp	.+4      	; 0x80e <__DATA_REGION_LENGTH__+0xe>
  80a:	22 0f       	add	r18, r18
@@ -1311,8 +1311,8 @@ void latch( int mylatchPin, int myclockPin)
  85e:	f1 f7       	brne	.-4      	; 0x85c <latch+0x1c>
  860:	00 c0       	rjmp	.+0      	; 0x862 <latch+0x22>
 	_delay_us(20);
-	PORTB &= ~(1U<<mylatchPin);  // Read Parallel
- 862:	45 b1       	in	r20, 0x05	; 5
+	PORTD &= ~(1U<<mylatchPin);  // Read Parallel
+ 862:	4b b1       	in	r20, 0x0b	; 11
  864:	b9 01       	movw	r22, r18
  866:	02 c0       	rjmp	.+4      	; 0x86c <latch+0x2c>
  868:	66 0f       	add	r22, r22
@@ -1323,16 +1323,16 @@ void latch( int mylatchPin, int myclockPin)
  872:	96 2f       	mov	r25, r22
  874:	90 95       	com	r25
  876:	94 23       	and	r25, r20
- 878:	95 b9       	out	0x05, r25	; 5
+ 878:	9b b9       	out	0x0b, r25	; 11
  87a:	7a e6       	ldi	r23, 0x6A	; 106
  87c:	7a 95       	dec	r23
  87e:	f1 f7       	brne	.-4      	; 0x87c <latch+0x3c>
  880:	00 c0       	rjmp	.+0      	; 0x882 <latch+0x42>
 	_delay_us(20);
-	PORTB |= (1U<<mylatchPin); // Serial Out
- 882:	95 b1       	in	r25, 0x05	; 5
+	PORTD |= (1U<<mylatchPin); // Serial Out
+ 882:	9b b1       	in	r25, 0x0b	; 11
  884:	89 2b       	or	r24, r25
- 886:	85 b9       	out	0x05, r24	; 5
+ 886:	8b b9       	out	0x0b, r24	; 11
  888:	8a e6       	ldi	r24, 0x6A	; 106
  88a:	8a 95       	dec	r24
  88c:	f1 f7       	brne	.-4      	; 0x88a <latch+0x4a>

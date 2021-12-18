@@ -18,9 +18,9 @@
 #define BAUD_PRESCALER (((F_CPU / (BAUD_RATE * 16UL))) - 1)
 
 #define  clockPin  PORTD7
-#define dataPin PORTB1
-#define clockenable PORTB2 
-#define latchPin PORTB0
+#define dataPin PORTD4
+#define clockenable PORTD3 
+#define latchPin PORTD5
 
 #define WR1 51
 #define WR2 52
@@ -61,10 +61,10 @@ void Initialization ()
 	
 	//PISO Init 
 	
-	DDRB |= (1U<<DDB0); // latch - Output
+	DDRD |= (1U<<DDD5); // latch - Output
 	DDRD |= (1U<<DDD7); // Clock - Output
-	DDRB |= (1U<<DDB2); // ClockINH - Output
-	DDRB &= ~(1U<<DDB1); // DataPin - Input
+	DDRD |= (1U<<DDD3); // ClockINH - Output
+	DDRD &= ~(1U<<DDD4); // DataPin - Input
 	 
 	
 }
