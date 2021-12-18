@@ -120,6 +120,9 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ASCII_LUT.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Board.c">
       <SubType>compile</SubType>
     </Compile>
@@ -129,6 +132,12 @@
     <Compile Include="Hall.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="LCD_GFX.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LCD_GFX.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -136,6 +145,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="PISO.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ST7735.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ST7735.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="UART.c">

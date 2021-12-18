@@ -56,6 +56,18 @@ void pieceprint(int piece)
 		UART_putstring(p);
 		break;
 		
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+		case 16:
+		case 17:
+		case 18:
+		sprintf(p,"\n\r");
+		UART_putstring(p);
+		
 		 default:
 		 sprintf(p,"\n\r");
 		 UART_putstring(p);

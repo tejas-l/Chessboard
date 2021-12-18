@@ -1,10 +1,3 @@
-/*
- * Hall_effect.c
- *
- * Created: 22-11-2021 10:22:15
- * Author : lalit
- */ 
-
 
 #define F_CPU 16000000UL
 #include <avr/io.h>
@@ -22,6 +15,7 @@
 #define clockenable PORTD3 
 #define latchPin PORTD5
 
+// White Pieces  
 #define WR1 51
 #define WR2 52
 #define WN1 31
@@ -31,6 +25,17 @@
 #define WQ 91
 #define WK 100
 
+// Whirte Pawns 
+#define WP1 10
+#define WP2 11
+#define WP3 13
+#define WP4 14
+#define WP5 15
+#define WP6 16
+#define WP7 17
+#define WP8 18
+
+// Black Pieces 
 #define BR1 53
 #define BR2 54
 #define BN1 33
@@ -40,36 +45,39 @@
 #define BQ 92
 #define BK 200
 
+// Black Pieces 
+#define BP1 20
+#define BP2 21
+#define BP3 22
+#define BP4 23
+#define BP5 24
+#define BP6 25
+#define BP7 26
+#define BP8 27
+
 char String[25];
 char String2[25];
 char String3[25];
 char String4[25];
-
-
-
 volatile int boardstate [4][8] = {
-						{WR1,0,WB1,WQ,WK,WB2,0,0}, 
-						{0,0,0,0,0,0,0,0},
+						{0,0,WB1,WQ,WK,WB2,0,0}, 
+						{0,0,WP3,WP4,WP5,WP6,0,0},
 						{0,0,0,0,0,0,0,0},
 						{0,0,0,0,0,0,0,0},	
 					};  
-
-
-
 void Initialization () 
 {
-	
+
 	//PISO Init 
+
 	
 	DDRD |= (1U<<DDD5); // latch - Output
 	DDRD |= (1U<<DDD7); // Clock - Output
 	DDRD |= (1U<<DDD3); // ClockINH - Output
 	DDRD &= ~(1U<<DDD4); // DataPin - Input
-	 
-	
+
+
 }
-
-
 int Row4 = 11;
 int Row3 = 12;
 int Row2= 11;
@@ -78,12 +86,10 @@ uint8_t rows[4] = {0} ;
 int test = 0; 
 int boardstateprev [4][8];
 int rowsprev [4];
-
-
 volatile int temp = 0; 
 volatile int print = 0;
 volatile int pick = 0; 
-
+volatile int capture = 0;
 
 void rowsupdate()
 {
@@ -109,9 +115,6 @@ void boardupdate()
 		}
 	}
 }
-
-
-
 void squareprev()
 {
 	int i,j;
@@ -121,32 +124,36 @@ void squareprev()
 		for (j=0;j<8;j++)
 		{
 			if((rows[i] & (0x1<<j) ) != 0 ) // pick up piece - 0-->1 transition
-			{
-				int check = boardstate [i][j];
+			{ 
+				_delay_ms(300); //debounce delay 
 				
-				if ( rows[i] != rowsprev[i])
+				if((rows[i] & (0x1<<j) ) != 0 )
 				{
-					if ( check != 0)
-					{
-						temp =boardstate[i][j];
-						boardstate[i][j] = 0;
-						print = 1;
-						pick =1;
-						rowsupdate();
-						boardupdate();
-
+					
+				
+						int check = boardstate [i][j];
 						
-					}
+						if ( rows[i] != rowsprev[i])
+						{
+							if ( check != 0)
+							{
+								temp =boardstate[i][j];
+								boardstate[i][j] = 0;
+								print = 1;
+								pick =1;
+								rowsupdate();
+								boardupdate();
+						
+							}
+						}
 				}
 			}
 		}
 	}
 }
-
-
 void  squarenext()
 {
-	char board[25];
+	//char board[25];
 	int i,j;
 	
 	for (i=0;i<4;i++)
@@ -155,39 +162,66 @@ void  squarenext()
 		{
 				if((rows[i] & (0x1<<j) )== 0 ) // 
 				{
-					int  check = boardstateprev[i][j];
+					_delay_ms(300); 
 					
-					if ( rows[i] != rowsprev[i]) 
+					if((rows[i] & (0x1<<j) )== 0 )
 					{
 						
 					
+							int  check = boardstateprev[i][j];
 					
-							if (check == 0)
+							if ( rows[i] != rowsprev[i]) 
 							{
+						
+									if (check == 0)
+									{
 					
-								boardstate[i][j] = temp ;
-								print = 1; 
-								pick = 0; 
+										boardstate[i][j] = temp ;
+										print = 1; 
+										pick = 0; 
 								
-								pieceprint(temp);
-								printsquare(i,j); 
-								rowsupdate();
-								boardupdate();
+										pieceprint(temp);
+										printsquare(i,j); 
+										rowsupdate();
+										boardupdate();
 						
 						
-								temp = 0;
+										temp = 0;
 						
-							}
- 						
+									}
+									
+									if ( check !=0)
+									{
+									 
+									 char cap [20];
+									 
+									 boardstate[i][j] = temp ;
+									 print = 1;
+									 pick = 0;
+									 /*capture = 1;  */
+									 
+									 pieceprint(temp);
+									 
+									sprintf(cap,"x");
+									UART_putstring(cap);
+									 
+									 printsquare(i,j);
+									 rowsupdate();
+									 boardupdate();
+									 
+									 
+									 temp = 0;
+									 
+									
+									
+									}
 					
+							}
 					}
-				}
-		}  
+			}  
+		}
 	}
 }
-
-
-
 void printboard()
 {
 	char p [25]; 
@@ -204,7 +238,6 @@ void printboard()
 	}
 	
 }
-
 void printrows()
 {
 		char r [25];
@@ -216,10 +249,7 @@ void printrows()
 	}
 	
 }
-
-
 char s[20];
-
 int main(void)
 {
    Initialization(); 
@@ -234,34 +264,16 @@ int main(void)
 	rows[1] = shiftIn(dataPin,clockPin);
 	rows[0] = shiftIn(dataPin,clockPin);
 	
-	/*Row4 = shiftIn(dataPin,clockPin);
-	Row3 = shiftIn(dataPin,clockPin);
-	Row2 = shiftIn(dataPin,clockPin);
-	Row1 = shiftIn(dataPin,clockPin);
-	
-	sprintf(String," %x  ",Row4);
-	UART_putstring(String);
-	sprintf(String2," %x  ",Row3);
-	UART_putstring(String2);
-	sprintf(String3," %x  ",Row2);
-	UART_putstring(String3);
-	sprintf(String4," %x\n\r  ",Row1);
-	UART_putstring(String4);
-	
-	_delay_ms(200);
-	*/ 
-// 	printrows();
+
 // 	_delay_ms(500);
-
 	//boardupdate(); 
-
 //	rowsupdate();
 	
 	squareprev();
 	_delay_ms(500);
 	
-	sprintf(s,"temp = %d \n\r",temp);
-	UART_putstring(s);
+// 	sprintf(s,"temp = %d \n\r",temp);
+// 	UART_putstring(s);
 		
 		if (pick)
 		{
@@ -270,11 +282,12 @@ int main(void)
 		}
 	
 		if (print)
-			{
+ 			{		
+				 sprintf(s,"temp = %d \n\r",temp);
+					UART_putstring(s);
 				printboard();
 				_delay_ms(500);
 				print= 0;
-			}
-
+		}
 	}
 }
