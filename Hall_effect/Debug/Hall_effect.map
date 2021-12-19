@@ -32,7 +32,7 @@ d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgc
 Allocating common symbols
 Common symbol       size              file
 
-rowsprev            0x8               main.o
+rowsprev            0x10              main.o
 String2             0x19              main.o
 boardstateprev      0x40              main.o
 String              0x19              main.o
@@ -87,7 +87,6 @@ Discarded input sections
  .bss           0x00000000        0x0 main.o
  .text.printrows
                 0x00000000       0x7a main.o
- .bss.capture   0x00000000        0x2 main.o
  .bss.test      0x00000000        0x2 main.o
  .data.Row1     0x00000000        0x2 main.o
  .data.Row2     0x00000000        0x2 main.o
@@ -414,7 +413,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xfe8
+.text           0x00000000     0x100e
  *(.vectors)
  .vectors       0x00000000       0x68 D:/AVR/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -515,69 +514,69 @@ END GROUP
                 0x0000030c      0x100 Board.o
                 0x0000030c                printsquare
  .text.Initialization
-                0x0000040c       0x2c main.o
+                0x0000040c       0x1a main.o
                 0x0000040c                Initialization
  .text.rowsupdate
-                0x00000438       0x28 main.o
-                0x00000438                rowsupdate
+                0x00000426       0x28 main.o
+                0x00000426                rowsupdate
  .text.boardupdate
-                0x00000460       0x4c main.o
-                0x00000460                boardupdate
+                0x0000044e       0x4c main.o
+                0x0000044e                boardupdate
  .text.squareprev
-                0x000004ac       0xf6 main.o
-                0x000004ac                squareprev
+                0x0000049a       0xf6 main.o
+                0x0000049a                squareprev
  .text.squarenext
-                0x000005a2      0x1b6 main.o
-                0x000005a2                squarenext
+                0x00000590      0x1b6 main.o
+                0x00000590                squarenext
  .text.printboard
-                0x00000758       0xbc main.o
-                0x00000758                printboard
- .text.main     0x00000814       0xee main.o
-                0x00000814                main
- .text.shiftIn  0x00000902       0x6a PISO.o
-                0x00000902                shiftIn
- .text.latch    0x0000096c       0x52 PISO.o
-                0x0000096c                latch
+                0x00000746       0xbc main.o
+                0x00000746                printboard
+ .text.main     0x00000802      0x126 main.o
+                0x00000802                main
+ .text.shiftIn  0x00000928       0x6a PISO.o
+                0x00000928                shiftIn
+ .text.latch    0x00000992       0x52 PISO.o
+                0x00000992                latch
  .text.UART_init
-                0x000009be       0x1e UART.o
-                0x000009be                UART_init
+                0x000009e4       0x1e UART.o
+                0x000009e4                UART_init
  .text.UART_send
-                0x000009dc        0xe UART.o
-                0x000009dc                UART_send
+                0x00000a02        0xe UART.o
+                0x00000a02                UART_send
  .text.UART_putstring
-                0x000009ea       0x1a UART.o
-                0x000009ea                UART_putstring
- .text.libgcc   0x00000a04        0xc d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
-                0x00000a04                __tablejump2__
+                0x00000a10       0x1a UART.o
+                0x00000a10                UART_putstring
+ .text.libgcc   0x00000a2a        0xc d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x00000a2a                __tablejump2__
  .text.avr-libc
-                0x00000a10       0x44 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x00000a10                sprintf
+                0x00000a36       0x44 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x00000a36                sprintf
  .text.avr-libc
-                0x00000a54      0x3c2 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00000a54                vfprintf
+                0x00000a7a      0x3c2 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x00000a7a                vfprintf
  .text.avr-libc
-                0x00000e16       0x16 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x00000e16                strnlen_P
+                0x00000e3c       0x16 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00000e3c                strnlen_P
  .text.avr-libc
-                0x00000e2c       0x16 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x00000e2c                strnlen
+                0x00000e52       0x16 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00000e52                strnlen
  .text.avr-libc
-                0x00000e42       0x78 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00000e42                fputc
+                0x00000e68       0x78 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00000e68                fputc
  .text.avr-libc
-                0x00000eba       0xbc d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x00000eba                __ultoa_invert
+                0x00000ee0       0xbc d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00000ee0                __ultoa_invert
  .text.libgcc.prologue
-                0x00000f76       0x38 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x00000f76                __prologue_saves__
+                0x00000f9c       0x38 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x00000f9c                __prologue_saves__
  .text.libgcc.prologue
-                0x00000fae       0x36 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x00000fae                __epilogue_restores__
-                0x00000fe4                . = ALIGN (0x2)
+                0x00000fd4       0x36 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x00000fd4                __epilogue_restores__
+                0x0000100a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000fe4        0x0 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000fe4                _exit
-                0x00000fe4                exit
+ .fini9         0x0000100a        0x0 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000100a                _exit
+                0x0000100a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -596,61 +595,61 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000fe4        0x4 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000100a        0x4 d:/avr/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000fe8                _etext = .
+                0x0000100e                _etext = .
 
-.data           0x00800100       0xac load address 0x00000fe8
+.data           0x00800100       0xec load address 0x0000100e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  .data.boardstate
-                0x00800100       0x40 main.o
+                0x00800100       0x80 main.o
                 0x00800100                boardstate
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800140       0x50 Board.o
+                0x00800180       0x50 Board.o
  .rodata.str1.1
-                0x00800190       0x1b main.o
+                0x008001d0       0x1b main.o
                                  0x1e (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x008001ac                . = ALIGN (0x2)
- *fill*         0x008001ab        0x1 
-                0x008001ac                _edata = .
-                0x008001ac                PROVIDE (__data_end, .)
+                0x008001ec                . = ALIGN (0x2)
+ *fill*         0x008001eb        0x1 
+                0x008001ec                _edata = .
+                0x008001ec                PROVIDE (__data_end, .)
 
-.bss            0x008001ac       0xca
-                0x008001ac                PROVIDE (__bss_start, .)
+.bss            0x008001ec       0xd6
+                0x008001ec                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.pick      0x008001ac        0x2 main.o
-                0x008001ac                pick
- .bss.print     0x008001ae        0x2 main.o
-                0x008001ae                print
- .bss.temp      0x008001b0        0x2 main.o
-                0x008001b0                temp
- .bss.rows      0x008001b2        0x4 main.o
-                0x008001b2                rows
+ .bss.pick      0x008001ec        0x2 main.o
+                0x008001ec                pick
+ .bss.print     0x008001ee        0x2 main.o
+                0x008001ee                print
+ .bss.temp      0x008001f0        0x2 main.o
+                0x008001f0                temp
+ .bss.rows      0x008001f2        0x8 main.o
+                0x008001f2                rows
  *(COMMON)
- COMMON         0x008001b6       0xc0 main.o
-                0x008001b6                rowsprev
-                0x008001be                String2
-                0x008001d7                boardstateprev
-                0x00800217                String
-                0x00800230                s
-                0x00800244                String3
-                0x0080025d                String4
-                0x00800276                PROVIDE (__bss_end, .)
-                0x00000fe8                __data_load_start = LOADADDR (.data)
-                0x00001094                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008001fa       0xc8 main.o
+                0x008001fa                rowsprev
+                0x0080020a                String2
+                0x00800223                boardstateprev
+                0x00800263                String
+                0x0080027c                s
+                0x00800290                String3
+                0x008002a9                String4
+                0x008002c2                PROVIDE (__bss_end, .)
+                0x0000100e                __data_load_start = LOADADDR (.data)
+                0x000010fa                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800276        0x0
+.noinit         0x008002c2        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800276                _end = .
+                0x008002c2                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -736,13 +735,13 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x15f1
+.debug_info     0x00000000     0x1669
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 D:/AVR/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x44c Board.o
- .debug_info    0x00000a40      0x7f6 main.o
- .debug_info    0x00001236      0x2bc PISO.o
- .debug_info    0x000014f2       0xff UART.o
+ .debug_info    0x00000a40      0x86e main.o
+ .debug_info    0x000012ae      0x2bc PISO.o
+ .debug_info    0x0000156a       0xff UART.o
 
 .debug_abbrev   0x00000000      0xa3f
  *(.debug_abbrev)
@@ -752,13 +751,13 @@ END GROUP
  .debug_abbrev  0x00000843      0x15d PISO.o
  .debug_abbrev  0x000009a0       0x9f UART.o
 
-.debug_line     0x00000000      0xa51
+.debug_line     0x00000000      0xa56
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 D:/AVR/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000134      0x252 Board.o
- .debug_line    0x00000386      0x46d main.o
- .debug_line    0x000007f3      0x176 PISO.o
- .debug_line    0x00000969       0xe8 UART.o
+ .debug_line    0x00000386      0x472 main.o
+ .debug_line    0x000007f8      0x176 PISO.o
+ .debug_line    0x0000096e       0xe8 UART.o
 
 .debug_frame    0x00000000      0x248
  *(.debug_frame)
@@ -767,16 +766,16 @@ END GROUP
  .debug_frame   0x000001c4       0x34 PISO.o
  .debug_frame   0x000001f8       0x50 UART.o
 
-.debug_str      0x00000000      0x53d
+.debug_str      0x00000000      0x535
  *(.debug_str)
  .debug_str     0x00000000      0x208 D:/AVR/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x16f Board.o
                                 0x1a8 (size before relaxing)
- .debug_str     0x00000377      0x148 main.o
-                                0x2de (size before relaxing)
- .debug_str     0x000004bf       0x4a PISO.o
+ .debug_str     0x00000377      0x140 main.o
+                                0x2d6 (size before relaxing)
+ .debug_str     0x000004b7       0x4a PISO.o
                                 0x206 (size before relaxing)
- .debug_str     0x00000509       0x34 UART.o
+ .debug_str     0x00000501       0x34 UART.o
                                 0x1b1 (size before relaxing)
 
 .debug_loc      0x00000000      0xc4e

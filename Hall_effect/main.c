@@ -59,11 +59,16 @@ char String[25];
 char String2[25];
 char String3[25];
 char String4[25];
-volatile int boardstate [4][8] = {
-						{0,0,WB1,WQ,WK,WB2,0,0}, 
-						{0,0,WP3,WP4,WP5,WP6,0,0},
+volatile int boardstate [8][8] = {
+						{WR1,WN1,WB1,WQ,WK,WB2,WN2,WR2}, 
+						{WP1,WP2,WP3,WP4,WP5,WP6,WP7,WP8},
 						{0,0,0,0,0,0,0,0},
 						{0,0,0,0,0,0,0,0},	
+						{0,0,0,0,0,0,0,0},
+						{0,0,0,0,0,0,0,0},
+						{BP1,BP2,BP3,BP4,BP5,BP6,BP7,BP8},
+						{BR1,BN1,BB1,BQ,BK,BB2,BN2,BR2}	
+								
 					};  
 void Initialization () 
 {
@@ -82,20 +87,20 @@ int Row4 = 11;
 int Row3 = 12;
 int Row2= 11;
 int Row1 =10; 
-uint8_t rows[4] = {0} ;  
+uint8_t rows[8] = {0} ;  
 int test = 0; 
 int boardstateprev [4][8];
-int rowsprev [4];
+int rowsprev [8];
 volatile int temp = 0; 
 volatile int print = 0;
 volatile int pick = 0; 
-volatile int capture = 0;
 
-void rowsupdate()
+
+void rowsupdate() // Update the elements in rowsprev to current rows value 
 {
 	int i;
 	
-	for (i=0;i<4;i++)
+	for (i=0;i<8;i++)
 	{
 		
 		
@@ -103,11 +108,11 @@ void rowsupdate()
 		
 	}
 }
-void boardupdate()
+void boardupdate() // Update the boardstateprev array to reflect the current positions of pieces on the board 
 {
 	int i,j;
 	
-	for (i=0;i<4;i++)
+	for (i=0;i<8;i++)
 	{
 		for (j=0;j<8;j++)
 		{
@@ -115,11 +120,11 @@ void boardupdate()
 		}
 	}
 }
-void squareprev()
+void squareprev() //  Identify Square from which a piece is picked up 
 {
 	int i,j;
 	
-	for (i=0;i<4;i++)
+	for (i=0;i<8;i++)
 	{
 		for (j=0;j<8;j++)
 		{
@@ -151,16 +156,16 @@ void squareprev()
 		}
 	}
 }
-void  squarenext()
+void  squarenext() // identify the square where the picked piece is placed 
 {
 	//char board[25];
 	int i,j;
 	
-	for (i=0;i<4;i++)
+	for (i=0;i<8;i++)
 	{
 		for (j=0;j<8;j++)
 		{
-				if((rows[i] & (0x1<<j) )== 0 ) // 
+				if((rows[i] & (0x1<<j) )== 0 ) // piece placed - 1-->0 transition 
 				{
 					_delay_ms(300); 
 					
@@ -190,7 +195,7 @@ void  squarenext()
 						
 									}
 									
-									if ( check !=0)
+									if ( check !=0) // Captures - If a piece already exists on the square where new piece is placed. 
 									{
 									 
 									 char cap [20];
@@ -198,7 +203,7 @@ void  squarenext()
 									 boardstate[i][j] = temp ;
 									 print = 1;
 									 pick = 0;
-									 /*capture = 1;  */
+									 
 									 
 									 pieceprint(temp);
 									 
@@ -225,11 +230,11 @@ void  squarenext()
 void printboard()
 {
 	char p [25]; 
-	for(int i=0; i<4; i++)
+	for(int i=0; i<8; i++)
 	{
 		for(int j=0 ; j<8; j++)
 		{
-		//sprintf("\t%d",boardstate[i][j]);
+		//sprintf("\t%d",boardstate[i][j]); //for debugging
 		sprintf(p,"\t%d ",boardstate[i][j]);
 		UART_putstring(p);
 		}
@@ -242,7 +247,7 @@ void printrows()
 {
 		char r [25];
 	
-	for (int i=0;i<4;i++)
+	for (int i=0;i<8;i++)
 	{
 		sprintf(r,"\t %x \n\r ",rows[i]);
 		UART_putstring(r);
@@ -257,8 +262,14 @@ int main(void)
     while (1) 
     {
 // 	
-	latch(latchPin,clockPin);
+	latch(latchPin,clockPin); 
 	
+	// Shift In data from 8 PISO shift registers and store it in an Array 
+	
+	rows[7] = shiftIn(dataPin,clockPin);
+	rows[6] = shiftIn(dataPin,clockPin);
+	rows[5] = shiftIn(dataPin,clockPin);
+	rows[4] = shiftIn(dataPin,clockPin);
 	rows[3] = shiftIn(dataPin,clockPin);
 	rows[2] = shiftIn(dataPin,clockPin);
 	rows[1] = shiftIn(dataPin,clockPin);
@@ -266,14 +277,14 @@ int main(void)
 	
 
 // 	_delay_ms(500);
-	//boardupdate(); 
-//	rowsupdate();
+	//boardupdate();  //for debugging 
+//	rowsupdate(); //for debugging
 	
 	squareprev();
 	_delay_ms(500);
 	
 // 	sprintf(s,"temp = %d \n\r",temp);
-// 	UART_putstring(s);
+// 	UART_putstring(s); //for debugging
 		
 		if (pick)
 		{
